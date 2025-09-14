@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define MAX_SIZE 1000
+
 
 void change(int *first, int *after){
     int temp;
@@ -78,7 +78,7 @@ void timecheck(int A[],int an){
     if (r_is_sorted(A,an)==1) printf("%10s\n","정렬됨");
     else printf("%10s\n","정렬안됨");
 }
-int D(void){
+int D(int MAX_SIZE){
     int an,n=1,step=0;
     int *arr;
     while (1) {
@@ -102,6 +102,14 @@ int D(void){
     return 0;
 }
 
+int binsearch(int list[], int searchnum, int right){
+
+}
+
+
+
+
+
 int main(void)
 {   
     srand(time(NULL));
@@ -121,13 +129,24 @@ int main(void)
         printf("%5d ",arr[i]%1000);
     }
     printf("... 완료\n");
-    printf("배열 A에 정렬된 정수의 정렬 상태 확인\n");
+    printf("1.1.3.배열 A에 정렬된 정수의 정렬 상태 확인\n");
     if (is_sorted(arr,100000)==1) printf("정렬완료!!!\n");
     free(arr);
+
     printf("1.2. 배열의 크기를 100부터 1,000,000까지 바꾸면서 sort 함수의 실행 시간 측정\n");
 
     printf("%10s %10s %10s\n","n","시간","정렬상태");
-    D();
+    D(100);
+    printf("1.3. 100,000개의 정수를 무작위로 생성하여 정렬 후 이진검색 수행\n1.3.1. 배열에 100,000개의 정수를 무작위로 생성하여 저장\n");
+    arr=makearr(100000);
+
+    printf("완료.\n");
+    /////////////////////////////////////////////
+    printf("1.3.2. 배열에 무작위로 저장된 정수 정렬\n");
+    if (arr!=NULL)sort(arr,100000);
+    printf("완료\n");
+    printf("1.3.3. 배열에 정렬된 정수의 정렬 상태 확인\n");
+    if (is_sorted(arr,100000)==1) printf("정렬완료!!!\n");
     return 0;
 }
 
