@@ -44,9 +44,22 @@ void timecheck(int A[]){
 }
 int D(void){
     int an,n=1,step=0;
+    int *list;
     while (1) {
         an=step+(n-1)*step;
         printf("%d\n",an);
+
+        list=(int *)malloc(sizeof(int)*an);
+        if (list==NULL) {
+            printf("no memory\n");
+            return -1;
+        }
+
+        // for(int i=0;i<size;i++){
+        // arr[i]=rand()%100000+1;
+        // }
+
+
         if (n==10 || step==0){
             n=1;
             if (step==0){step=10;
