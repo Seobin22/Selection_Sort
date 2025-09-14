@@ -34,13 +34,28 @@ int is_sorted(int A[],int n){
     return 1;
 }
 void timecheck(int A[]){
-
+    /*for(step;step<10001;)*/
     clock_t start;
     double time_used;
     start = clock();
     sort(A);
 ;   time_used = ((double) (clock() - start)) / CLOCKS_PER_SEC;
     printf("time : %f\n",time_used);
+}
+int D(void){
+    int an,n=1,step=0;
+    while (1) {
+        an=step+(n-1)*step;
+        printf("%d\n",an);
+        if (n==10 || step==0){
+            n=1;
+            if (step==0){step=10;
+                n=0;}
+            else if (step==1000)break;
+            else step*=10;
+        }
+        n++;
+    }
 }
 
 int main(void)
@@ -54,7 +69,8 @@ int main(void)
 
     sort(arr);
     is_sorted(arr,size);
-
+    printf("+________________");
+    D();
     return 0;
 }
 
