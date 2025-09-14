@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define Max 1000000
+#define MAX_SIZE 1000
 
 void change(int *first, int *after){
     int temp;
@@ -9,7 +9,27 @@ void change(int *first, int *after){
     *first = *after;
     *after = temp;
 }
-
+void r_sort(int *arr,int an){
+    if (an>0){
+    int max;
+    for(int top=0;top<an-1;top++){
+        max=top;
+        for (int t=top+1;t<an;t++){
+            if(arr[max] < arr[t]) max=t;
+            }    
+            if (top!=max) change(&arr[top],&arr[max]);
+        }                
+}
+}
+int r_is_sorted(int A[],int n){
+    for (int i=0; i<n-1;i++){
+        if (A[i]<A[i+1]){
+            return 0;
+        }
+    }
+    return 1;
+}
+/////////////////////////////////////
 void sort(int *arr,int an){
     if (an>0){
     int mi;
@@ -26,24 +46,24 @@ void sort(int *arr,int an){
 int is_sorted(int A[],int n){
     for (int i=0; i<n-1;i++){
         if (A[i]>A[i+1]){
-            
-        
             return 0;
         }
     }
-    
-
     return 1;
 }
+///////////////////////////////////////////
+
+
+
 void timecheck(int A[],int an){
     /*for(step;step<10001;)*/
     clock_t start;
     double time_used;
     start = clock();
-    sort(A,an); 
+    r_sort(A,an); 
     time_used = ((double) (clock() - start)) / CLOCKS_PER_SEC;
-    printf("%10f",time_used);
-    if (is_sorted(A,an)==1) printf("%10s\n","정렬됨");
+    printf("%10.3f",time_used);
+    if (r_is_sorted(A,an)==1) printf("%10s\n","정렬됨");
     else printf("%10s\n","정렬안됨");
 }
 int D(void){
@@ -52,7 +72,7 @@ int D(void){
     while (1) {
         an=step+(n-1)*step;
         printf("%10d",an);//배열크기
-/////////////////////////////////(arr 생성)
+
         arr=(int *)malloc(sizeof(int)*an);
         if (arr==NULL) {
             printf("no memory\n");
@@ -62,7 +82,7 @@ int D(void){
         for(int i=0;i<an;i++){
         arr[i]=rand()%100000+1;
         }}
-////////////////////////////////////
+
         timecheck(arr, an);
         free(arr);
 
@@ -71,7 +91,7 @@ int D(void){
             n=1;
             if (step==0){step=10;
                 n=0;}
-            else if (step==1000)break;
+            else if (step==MAX_SIZE/10)break;
             else step*=10;
         }
         n++;
@@ -82,6 +102,8 @@ int main(void)
 {   
     printf("%10s %10s %10s\n","n","시간","정렬상태");
     srand(time(NULL));
+
+    
     D();
     return 0;
 }
