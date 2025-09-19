@@ -61,7 +61,8 @@ int *makearr(int an){
         }
         if(an!=0){
         for(int i=0;i<an;i++){
-        arr[i]=rand()%100000+1;
+        long long big_rand = ((long long)rand() << 15) | rand();
+        arr[i] = (big_rand % 100000) + 1;
         }}
         return arr;
 }
@@ -165,13 +166,26 @@ int r_binsearch(int list[], int searchnum,int left, int right){
 
 int main(void)
 {   
+
+    
     srand(time(NULL));
+    
     int *arr;
     int searchnum1[]={1,10,100,1000,10000,12500,50000,53125,75000,75195,100000};
     int searchnum2[]={120,121,122,123,124,125,126,127,128,129,130};
-    int searchnum3[]={5,50,195,500,781,5000,12548,25012,281245,37500,50000};
+    int searchnum3[]={5,50,195,500,781,5000,12548,25012,28125,37500,50000};
     printf("1.1. 무작위 100,000개 정수 생성 및 정렬, 정렬 검사 수행\n");
-
+    // int *arrr;
+    // arrr = (int*)malloc(sizeof(int) * 100000);
+    // for(int i = 0; i < 100000; i++) {
+    //     arrr[i] = i + 1;
+    // }
+    // if (is_sorted(arrr, 100000) == 1) printf("정렬완료!!!\n");
+    //   for(int i=0;i<11;i++){
+    //     int counter=binsearch(arrr,searchnum1[i],0,99999);
+    //     printf("검색 데이터( 1 ~ 100000 ) : %d\n",searchnum1[i]);
+    //     printf("검색 데이터 :        %d, 	Counter : %d\n",searchnum1[i],counter);
+    // }
 
     printf("1.1.1. 배열 A에 100,000개의 정수를 무작위로 생성하여 저장\n");
     arr=makearr(100000);
